@@ -6,13 +6,13 @@ const moment = require("moment");
 module.exports = {
   listHistory: async function (req, res, next) {
     let data = await History.findByLambda();
-    res.json(resSuccess({ data: data }));
+    res.json(resSuccess(data));
   },
 
   findById: async function (req, res) {
     let id = req.params.id;
     let data = await History.findByLambda({ _id: id });
-    res.json(resSuccess({ data: data[0] }));
+    res.json(resSuccess(data[0]));
   },
 
   postCreate: async function (req, res, next) {
@@ -36,7 +36,7 @@ module.exports = {
         message: error.message,
         detail: error.detail,
       };
-      res.json(resFail({ data: data }));
+      res.json(resFail(data));
     }
   },
 
@@ -47,14 +47,14 @@ module.exports = {
         is_deleted: true,
       };
       let result = await History.updateByLambda({ _id: id }, entity);
-      res.json(resSuccess({ data: result }));
+      res.json(resSuccess(result));
     } catch (error) {
       data = {
         ...error,
         message: error.message,
         detail: error.detail,
       };
-      res.json(resFail({ data: data }));
+      res.json(resFail(data));
     }
   },
 };

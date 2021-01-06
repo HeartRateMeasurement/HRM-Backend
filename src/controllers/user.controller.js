@@ -18,7 +18,7 @@ module.exports = {
       },
     };
     let data = await User.findByLambda(lambda);
-    res.json(resSuccess({ data: data }));
+    res.json(resSuccess(data));
   },
 
   findById: async function (req, res) {
@@ -33,7 +33,7 @@ module.exports = {
       },
     };
     let data = await User.findByLambda(lambda);
-    res.json(resSuccess({ data: data[0] }));
+    res.json(resSuccess(data[0]));
   },
 
   postCreate: async function (req, res, next) {
@@ -75,7 +75,7 @@ module.exports = {
         message: error.message,
         detail: error.detail,
       };
-      res.json(resFail({ data: data }));
+      res.json(resFail(data));
     }
   },
 
@@ -102,7 +102,7 @@ module.exports = {
         message: error.message,
         detail: error.detail,
       };
-      res.json(resFail({ data: data }));
+      res.json(resFail(data));
     }
   },
 
@@ -120,7 +120,7 @@ module.exports = {
         message: error.message,
         detail: error.detail,
       };
-      res.json(resFail({ data: data }));
+      res.json(resFail(data));
     }
   },
 
@@ -151,14 +151,14 @@ module.exports = {
         };
       }
       delete data[0].password;
-      res.json(resSuccess({ data: data[0] }));
+      res.json(resSuccess(data[0]));
     } catch (error) {
       let data = {
         ...error,
         message: error.message,
         detail: error.detail,
       };
-      res.json(resFail({ data: data }));
+      res.json(resFail(data));
     }
   },
 };
