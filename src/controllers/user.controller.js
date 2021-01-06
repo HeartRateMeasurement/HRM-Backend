@@ -149,17 +149,13 @@ module.exports = {
       if (data[0].is_deleted) {
         throw {
           status: 204,
-          error: "Admin is deleted!",
+          e: "Admin is deleted!",
         };
       }
       delete data[0].password;
       res.json(resSuccess(data[0]));
-    } catch (err) {
-      let data = {
-        ...err,
-        error: error.message
-      };
-      res.json(resFail(data));
+    } catch (error) {
+      res.json(resFail(error));
     }
   },
 };
