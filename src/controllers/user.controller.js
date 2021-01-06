@@ -154,9 +154,9 @@ module.exports = {
       }
       delete data[0].password;
       res.json(resSuccess(data[0]));
-    } catch (error) {
+    } catch (err) {
       let data = {
-        ...error,
+        ...err,
         error: error.message
       };
       res.json(resFail(data));
