@@ -126,12 +126,14 @@ module.exports = {
 
   postLogin: async (req, res) => {
     try {
+      console.log(req.body);
+      console.log(req.body.email + " " + req.body.password);
       let data = await User.findByLambda({ query: { email: req.body.email } });
       console.log("data: ", data);
       if (!data || !data.length) {
         throw {
           status: 204,
-          detail: "Admin is not existed!",
+          error: "Admin is not existed!",
         };
       }
       let password = sha256(req.body.password).toString();
@@ -141,13 +143,13 @@ module.exports = {
       if (password != data[0].password) {
         throw {
           status: 204,
-          detail: "Wrong password!",
+          error: "Wrong password!",
         };
       }
       if (data[0].is_deleted) {
         throw {
           status: 204,
-          detail: "Admin is deleted!",
+          error: "Admin is deleted!",
         };
       }
       delete data[0].password;
@@ -155,8 +157,7 @@ module.exports = {
     } catch (error) {
       let data = {
         ...error,
-        message: error.message,
-        detail: error.detail,
+        error: error.message
       };
       res.json(resFail(data));
     }
