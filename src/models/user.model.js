@@ -18,11 +18,7 @@ let User = mongoose.model("User", userSchema, "users");
 
 module.exports = {
   findByLambda: async function (lambda) {
-    lambda = {
-      ...lambda,
-      is_deleted: false,
-    };
-    return await User.find(lambda);
+    return await User.find(lambda.query, lambda.views);
   },
   findByEmailPassword: async function (lambda) {
     lambda = {
@@ -33,14 +29,6 @@ module.exports = {
       {
         $match: lambda,
       },
-      // {
-      //   $lookup: {
-      //     from: 'permissions',
-      //     localField: 'permissions_id',
-      //     foreignField: '_id',
-      //     as: 'permissions'
-      //   }
-      // }
     ]);
   },
   createByLambda: async function (lambda) {

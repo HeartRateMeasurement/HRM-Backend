@@ -5,6 +5,7 @@ var tokenSchema = new mongoose.Schema(
     user_id: String,
     result: String,
     create_at: Date,
+    updated_at: Date,
     is_deleted: Boolean,
   },
   { versionKey: false }
