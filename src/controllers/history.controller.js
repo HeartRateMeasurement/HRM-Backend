@@ -14,12 +14,6 @@ module.exports = {
     let data = await History.findByLambda({ _id: id });
     res.json(resSuccess(data[0]));
   },
-  findByUserId: async function (req, res) {
-    let id = req.params.id;
-    let data = await History.findByLambda({ user_id: id });
-    res.json(resSuccess(data[0]));
-  },
-
 
   postCreate: async function (req, res, next) {
     try {

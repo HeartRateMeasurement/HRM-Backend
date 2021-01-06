@@ -4,7 +4,6 @@ const resFail = require("../response/res-fail");
 const { omitBy, isNil } = require("lodash");
 const moment = require("moment");
 const sha256 = require("crypto-js/sha256");
-const historyController = require("./history.controller")
 
 module.exports = {
   listUser: async function (req, res, next) {
@@ -71,7 +70,12 @@ module.exports = {
         })
       );
     } catch (error) {
-      res.json(resFail(error));
+      let data = {
+        ...error,
+        message: error.message,
+        detail: error.detail,
+      };
+      res.json(resFail(data));
     }
   },
 
@@ -149,8 +153,7 @@ module.exports = {
         };
       }
       delete data[0].password;
-      const history = await historyController.findByUserId(data[0]._id)
-      res.json(resSuccess({ user: data[0], history }));
+      res.json(resSuccess(data[0]));
     } catch (error) {
       res.json(resFail(error));
     }

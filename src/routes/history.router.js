@@ -8,5 +8,4 @@ router.post("/", controller.postCreate);
 router.get("/:id", controller.findById);
 // router.patch("/:id", controller.patchUpdate);
 router.delete("/:id", controller.delete);
-router.get("/user/:id", controller.findByUserId);
 module.exports = router;
